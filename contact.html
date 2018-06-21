@@ -105,29 +105,29 @@
                       <!--Grid column: email form-->
                       <div class="col-md-8 col-xl-9">
                           <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-                              <!--Grid row-->
+                              <!--Grid row: name & email-->
                               <div class="row">
-                                  <!--Grid column-->
+                                  <!--Grid column: ur name-->
                                   <div class="col-md-6">
                                       <div class="md-form">
                                           <input type="text" id="name" name="name" class="form-control">
                                           <label for="name" class="">Your name</label>
                                       </div>
                                   </div>
-                                  <!--Grid column-->
+                                  <!--Grid column: ur name-->
 
-                                  <!--Grid column-->
+                                  <!--Grid column: ur email-->
                                   <div class="col-md-6">
                                       <div class="md-form">
                                           <input type="text" id="email" name="email" class="form-control">
                                           <label for="email" class="">Your email</label>
                                       </div>
                                   </div>
-                                  <!--Grid column-->
+                                  <!--Grid column: ur email-->
                               </div>
-                              <!--Grid row-->
+                              <!--Grid row: name & email-->
 
-                              <!--Grid row-->
+                              <!--Grid row: subject-->
                               <div class="row">
                                   <div class="col-md-12">
                                       <div class="md-form">
@@ -136,7 +136,7 @@
                                       </div>
                                   </div>
                               </div>
-                              <!--Grid row-->
+                              <!--Grid row: subject-->
 
                               <!--Grid row-->
                               <div class="row">
@@ -302,6 +302,9 @@
         google.maps.event.addDomListener(window, 'load', init_map);
     </script>
 
+    <div class="hiddendiv common"></div>
+    <span id="buffer-extension-hover-button" style="display: none; position: absolute; z-index: 8675309; width: 100px; height: 25px; background-image: url(&quot;chrome-extension://noojglkidnpfjbincgijbaiedldjfbhh/data/shared/img/buffer-hover-icon@2x.png&quot;); background-size: 100px 25px; opacity: 0.9; cursor: pointer;"></span>
+
     <!-- validate form -->
     <script>
       function validateForm() {
@@ -333,36 +336,33 @@
           }
           document.getElementById('status').innerHTML = "Sending...";
           formData = {
-                      'name'     : $('input[name=name]').val(),
-                      'email'    : $('input[name=email]').val(),
-                      'subject'  : $('input[name=subject]').val(),
-                      'message'  : $('textarea[name=message]').val()
-                  };
+              'name'     : $('input[name=name]').val(),
+              'email'    : $('input[name=email]').val(),
+              'subject'  : $('input[name=subject]').val(),
+              'message'  : $('textarea[name=message]').val()
+          };
 
 
-                  $.ajax({
-                  url : "mail.php",
-                  type: "POST",
-                  data : formData,
-                  success: function(data, textStatus, jqXHR)
-                  {
+          $.ajax({
+          url : "mail.php",
+          type: "POST",
+          data : formData,
+          success: function(data, textStatus, jqXHR)
+          {
 
-                      $('#status').text(data.message);
-                      if (data.code) //If mail was sent successfully, reset the form.
-                      $('#contact-form').closest('form').find("input[type=text], textarea").val("");
-                  },
-                  error: function (jqXHR, textStatus, errorThrown)
-                  {
-                      $('#status').text(jqXHR);
-                  }
-                  });
-          document.getElementById('contact-form').submit();
-      }
+              $('#status').text(data.message);
+              if (data.code) //If mail was sent successfully, reset the form.
+              $('#contact-form').closest('form').find("input[type=text], textarea").val("");
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+              $('#status').text(jqXHR);
+          }
+          });
+                    document.getElementById('contact-form').submit();
+                }
     </script>
     <!-- validate form -->
-
-    <div class="hiddendiv common"></div>
-    <span id="buffer-extension-hover-button" style="display: none; position: absolute; z-index: 8675309; width: 100px; height: 25px; background-image: url(&quot;chrome-extension://noojglkidnpfjbincgijbaiedldjfbhh/data/shared/img/buffer-hover-icon@2x.png&quot;); background-size: 100px 25px; opacity: 0.9; cursor: pointer;"></span>
 </body>
 
 </html>
